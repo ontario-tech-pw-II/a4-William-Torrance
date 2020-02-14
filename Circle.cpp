@@ -23,22 +23,24 @@ class Circle {
 
 Circle::Circle(int x,int y, double r)
 {
-  // Initialize the object here
+    (*this).x = x;
+    (*this).y = y;
+    (*this).r = r;
 }
 
 double Circle::area() const {
-  // Return the area of a circle  
+    return 3.14*r*r;
 }
 
 double Circle::operator+(const Circle & c) const
 {
-   // + Return the area of two circles  
+    return (*this).area() + c.area();
 
 }
 
 Circle & Circle::operator++()
 {
-  // Increment the radius by 1
+    r++;
 
   return *this;
 }
@@ -46,54 +48,58 @@ Circle & Circle::operator++()
 Circle Circle::operator++(int)
 {
   Circle temp = *this;
-  
-  //increment the radius by 1
+  r++;
 
   return temp;
 }
 
 ostream & operator<<(ostream &out, const Circle &c)
 {
-
-  // print a circle in the out stream (the format is the same as print())
+    out << c.area() << endl;
   return out;
 }
 
 istream & operator>>(istream &in, Circle &c)
 {
- 
- // Read a circle information form the in stream
-
+    int inx,iny;
+    double inr;
+    cout << "What is the X coordinent of the circle? ";
+    in >> inx;
+    cout << "What is the Y coordinent of the circle? ";
+    in >> iny;
+    cout << "What is the radius of the circle? ";
+    in >> inr;
+    c = Circle(inx,iny,inr);
   return in;
 }
 
 
 void Circle::print() const
 {
-  cout << "Circle =(" << x << "," << y << "," << r << ")" << endl;
+  cout << "Circle = (" << x << "," << y << "," << r << ")" << endl;
 }
 
 
 
 int main()
 {
-  // Circle a;
-  // Circle b(2,3,3.0);
+  Circle a;
+  Circle b(2,3,3.0);
 
-  // a.print();
-  // b.print();
+  a.print();
+  b.print();
   
-  // cout << "The area a + b is: " << a+b << endl;
-  // ++a;
-  // a.print();
+  cout << "The area a + b is: " << a+b << endl;
+  ++a;
+  a.print();
 
-  // a++;
-  // a.print();
+  a++;
+  a.print();
 
-  // cout << a;
+  cout << a;
 
-  // cin >> a;
-  // cout <<a;
+  cin >> a;
+  cout <<a;
 
   return 0;
 
